@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8fb" />
+  <title>Action Pass! | YMS English</title>
+  <style>
+    :root{--navy:#0d1b36;--navy2:#14294d;--blue:#3779f6;--ice:#eaf2ff;--paper:#f7f8fb;--ink:#10213d;--muted:#72809a;--lime:#c8ff56;--coral:#ff735e;--line:#e4e9f1;--shadow:0 18px 55px #0b1c381c}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;min-height:100vh}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #ffb84b;outline-offset:3px}
+    .topbar{height:72px;background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:0 max(5vw,24px)}.brand{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.4px}.logo{width:34px;height:34px;background:var(--lime);border-radius:11px;display:grid;place-items:center;color:var(--navy);font-size:19px;transform:rotate(-7deg)}.brand small{font:500 10px 'DM Mono',monospace;color:#98abc9;letter-spacing:1.3px;display:block;margin-top:2px}.top-actions{display:flex;gap:10px}.quiet{border:1px solid #314363;color:#d8e3f6;background:transparent;border-radius:10px;padding:9px 13px;font-size:13px;font-weight:700}.quiet:hover{background:#1b3156}
+    main{max-width:1120px;margin:0 auto;padding:48px 28px 64px}.eyebrow{font:500 11px 'DM Mono',monospace;color:var(--blue);letter-spacing:1.5px;text-transform:uppercase}.headline{font:700 clamp(34px,5vw,56px)/1.05 'Space Grotesk',sans-serif;letter-spacing:-2.4px;margin:12px 0 13px;color:var(--navy)}.headline em{font-style:normal;color:var(--blue)}.intro{color:#66748b;font-size:15px;margin:0;line-height:1.6}.intro b{color:var(--ink)}
+    .setup{margin-top:34px;display:grid;grid-template-columns:1.15fr .85fr;gap:16px}.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:22px 24px;box-shadow:0 4px 18px #0b1c3808}.panel-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.panel-title h2{font:700 14px 'Space Grotesk',sans-serif;margin:0;letter-spacing:.1px}.panel-title span{color:var(--muted);font-size:12px}.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stage{position:relative;text-align:left;background:white;border:1px solid var(--line);border-radius:14px;padding:13px 11px 12px;min-height:96px;color:var(--ink);transition:.18s}.stage:hover{transform:translateY(-2px);border-color:#9cbafa}.stage.active{border:2px solid var(--blue);background:#f4f8ff;padding:12px 10px 11px;box-shadow:0 5px 16px #3779f61c}.stage .n{font:500 10px 'DM Mono',monospace;color:#8491a5;letter-spacing:.6px}.stage strong{display:block;font:700 15px 'Space Grotesk',sans-serif;margin:5px 0 3px}.stage small{font-size:10px;color:var(--muted);line-height:1.3;display:block}.stage .check{position:absolute;right:9px;top:9px;color:var(--blue);font-size:12px;font-weight:bold;opacity:0}.stage.active .check{opacity:1}
+    .player-options{display:flex;gap:9px}.player{flex:1;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:13px 9px;font-weight:700;transition:.18s}.player span{display:block;font:500 10px 'DM Mono',monospace;color:#8793a7;margin-top:3px}.player.active{border-color:var(--blue);background:#f3f7ff;color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}.disabled-options{opacity:.45;pointer-events:none}.player-note{font-size:11px;color:var(--muted);margin:12px 0 0;line-height:1.5}
+    .game{margin-top:18px;background:white;border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:var(--shadow);position:relative;overflow:hidden}.game:before{content:'';position:absolute;width:320px;height:320px;border-radius:50%;background:#edf3ff;right:-105px;top:-200px;pointer-events:none}.game-head{position:relative;display:flex;justify-content:space-between;align-items:center;gap:14px}.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;background:var(--ice);border-radius:999px;color:var(--blue);font:500 10px 'DM Mono',monospace;letter-spacing:.5px}.dot{width:7px;height:7px;background:var(--blue);border-radius:50%}.round{color:var(--muted);font:500 11px 'DM Mono',monospace}.command-wrap{position:relative;min-height:220px;display:grid;place-items:center;text-align:center;padding:27px 15px 20px}.ready{color:#93a0b4;font:600 14px 'Space Grotesk',sans-serif;letter-spacing:.2px}.command{font:700 clamp(28px,5.8vw,60px)/1.12 'Space Grotesk',sans-serif;letter-spacing:-1.8px;max-width:780px;color:var(--navy);animation:pop .3s ease both}.command .cursor{display:inline-block;width:7px;height:.85em;background:var(--blue);margin-left:7px;border-radius:4px;vertical-align:-.04em;animation:blink 1s steps(2) infinite}.hint{font:500 10px 'DM Mono',monospace;color:#8e9ab0;letter-spacing:1.1px;text-transform:uppercase;margin-top:12px}@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}@keyframes blink{50%{opacity:0}}
+    .controls{position:relative;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.btn{border:0;border-radius:13px;padding:14px 22px;font-weight:800;letter-spacing:.1px;transition:transform .15s,filter .15s}.btn:hover{transform:translateY(-2px);filter:brightness(1.02)}.btn:active{transform:translateY(0)}.start{background:var(--navy);color:white;min-width:210px;box-shadow:0 8px 20px #0d1b3630}.judge{min-width:154px;display:none}.pass{background:#dff7a7;color:#274300}.fail{background:#ffe5df;color:#a53928}.next{background:var(--blue);color:white;min-width:210px;display:none}.controls.running .start{display:none}.controls.running .judge{display:inline-block}.controls.after .judge{display:none}.controls.after .next{display:inline-block}.controls.complete .btn{display:none}.result{position:relative;min-height:20px;text-align:center;margin-top:16px;color:var(--muted);font-size:13px;font-weight:700}.result.good{color:#477500}.result.bad{color:#bf4632}.result.neutral{color:var(--muted)}.cue-tools{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;margin:-4px auto 16px}.cue-tools[hidden],.cue-guide[hidden]{display:none}.cue-toggle{border:1px solid #e5c68c;border-radius:999px;background:#fff7e6;color:#5d3e26;padding:9px 16px;font-weight:800;font-size:12px;box-shadow:0 3px 10px #38234f10}.cue-toggle:hover{background:#ffedc8;transform:translateY(-1px)}.cue-guide{width:min(850px,100%);padding:14px;background:linear-gradient(135deg,#fff9ec,#f7effb);border:1px solid #e9d9b9;border-radius:18px;box-shadow:0 8px 25px #38234f12;animation:cuePop .25s ease both}.cue-heading{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 11px;color:#563c62;font-weight:800;font-size:12px}.cue-heading small{font-size:10px;font-weight:600;color:#8c7b90}.cue-list{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}.cue-card{position:relative;display:grid;justify-items:center;align-content:center;gap:4px;min-width:104px;min-height:100px;padding:10px 12px 9px;background:#fff;border:1px solid #eee0cb;border-radius:15px;box-shadow:0 3px 10px #38234f0a}.cue-number{position:absolute;left:8px;top:7px;color:#a18da6;font:700 9px 'DM Mono',monospace}.cue-actor{position:absolute;right:7px;top:6px;padding:2px 5px;border-radius:999px;background:#efe7f4;color:#674b78;font-size:9px;font-weight:800}.cue-pic{font-size:38px;line-height:1.1}.cue-label{max-width:120px;color:#493a4f;font-size:11px;font-weight:800;text-align:center;line-height:1.3}@keyframes cuePop{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}@media(max-width:430px){.cue-guide{padding:10px}.cue-card{min-width:86px;min-height:88px;padding:8px}.cue-pic{font-size:32px}.cue-label{font-size:10px}}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:15px;overflow:hidden;margin-top:22px;position:relative}.stat{background:#fff;padding:13px 15px;display:flex;justify-content:space-between;align-items:center}.stat span{font-size:11px;color:var(--muted)}.stat strong{font:700 17px 'Space Grotesk',sans-serif}.stat.passStat strong{color:#5a9000}.stat.failStat strong{color:#d95843}.progress{height:5px;background:#edf0f5;border-radius:5px;margin-top:15px;overflow:hidden}.progress i{display:block;width:0;height:100%;background:var(--blue);border-radius:5px;transition:width .3s}.footnote{display:flex;justify-content:space-between;align-items:center;color:#8c98ab;font-size:11px;margin-top:13px}.key{font:500 10px 'DM Mono',monospace;border:1px solid #dce2eb;border-radius:5px;padding:2px 5px;color:#65738a;background:#f8f9fb}
+    .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,18px);background:var(--navy);color:white;border-radius:12px;padding:12px 18px;font-size:13px;font-weight:700;box-shadow:0 10px 35px #0d1b3640;opacity:0;pointer-events:none;transition:.25s;z-index:5}.toast.show{opacity:1;transform:translate(-50%,0)}.flash{position:absolute;inset:0;pointer-events:none;border-radius:24px;animation:flash .55s ease-out}@keyframes flash{0%{opacity:.3;background:#c8ff56}100%{opacity:0;background:#c8ff56}}.flash.wrong{animation-name:flashbad}@keyframes flashbad{0%{opacity:.28;background:#ff735e}100%{opacity:0;background:#ff735e}}
+    @media(max-width:780px){main{padding:34px 18px 45px}.setup{grid-template-columns:1fr}.stages{grid-template-columns:repeat(2,1fr)}.stage{min-height:84px}.topbar{padding:0 18px}.game{padding:19px}.command-wrap{min-height:195px}.footnote{align-items:flex-start;gap:8px;flex-direction:column}}
+    @media(max-width:430px){.topbar{height:62px}.quiet{padding:8px 10px;font-size:11px}.brand{font-size:13px}.logo{width:30px;height:30px}.headline{letter-spacing:-1.5px}.panel{padding:18px}.stage strong{font-size:14px}.btn{padding:13px 15px}.judge{min-width:125px;flex:1}.start,.next{width:100%}.stats{grid-template-columns:1fr}.stat{padding:9px 13px}}
+
+    .logo{font:700 13px 'DM Sans',Arial,sans-serif;transform:none;letter-spacing:-.5px}
+    .editor{margin-top:18px}.editor[hidden]{display:none}.editor-close{padding:6px 10px}.editor-note{margin:-5px 0 16px;color:var(--muted);font-size:13px;line-height:1.5}.editor-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:13px}.editor-card{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fbfcfe}.editor-card h3,.editor-bottom h3{margin:0 0 5px;font-size:14px}.editor-card p{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.45}.editor-card form{display:grid;gap:10px}.editor-card label{display:grid;gap:5px;font-size:12px;font-weight:700;color:#43516a}.editor-card label small{font-size:10px;color:var(--muted)}.editor-card input,.editor-card textarea,.editor-card select{width:100%;border:1px solid #d7dfeb;border-radius:9px;background:white;color:var(--ink);padding:9px 10px;font:500 13px 'DM Sans',Arial,sans-serif}.editor-card textarea{min-height:76px;resize:vertical}.field-stack{display:grid;gap:9px;padding:11px;border-radius:10px;background:#f3f7fc}.field-stack[hidden]{display:none}.field-title{font-size:12px;font-weight:800;color:var(--navy)}.word-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}.add-button{border:0;border-radius:9px;padding:10px 13px;background:var(--blue);color:white;font-weight:800}.saved-words{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.word-chip{display:inline-flex;align-items:center;gap:5px;background:#edf3fb;border-radius:999px;padding:4px 9px;color:#355274;font-size:11px}.word-chip button{border:0;background:none;color:#8b5361;font-weight:900;padding:0 2px}.editor-bottom{display:grid;grid-template-columns:1fr auto;gap:15px;align-items:start;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}.custom-list{display:flex;flex-wrap:wrap;gap:7px}.custom-item{display:flex;align-items:center;gap:8px;max-width:100%;padding:6px 9px;background:#f4f7fb;border:1px solid var(--line);border-radius:9px;font-size:11px}.custom-item span{overflow-wrap:anywhere}.custom-item button{border:0;border-radius:6px;background:#fff0ef;color:#9b382d;padding:4px 7px;font-size:10px;font-weight:800}.backup-actions{display:flex;gap:7px;flex-wrap:wrap}.import-label{cursor:pointer}.empty-custom{color:var(--muted);font-size:12px}.cue-toggle{border-color:#cbdcf2;background:#f3f8ff;color:#285b91}.cue-toggle:hover{background:#e7f1ff}.cue-guide{background:linear-gradient(135deg,#f7fbff,#f3f7fd);border-color:#cfdaea}.cue-heading{color:#304f72}.cue-card{border-color:#dbe4ef}.cue-label{color:#344a64}.cue-actor{background:#e7eef8;color:#365575}
+    @media(max-width:780px){.editor-grid{grid-template-columns:1fr}.editor-bottom{grid-template-columns:1fr}.backup-actions{margin-top:5px}}
+    @media(max-width:430px){.editor-card{padding:12px}.word-pair{grid-template-columns:1fr}.top-actions{gap:5px}.top-actions .quiet span{display:none}}
+
+  </style>
+
+
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="logo">AP</div><div>ACTION PASS!<small>YMS ENGLISH · ACTION GAME</small></div></div>
+    <div class="top-actions"><button class="quiet" id="manageBtn" title="단어와 문장 추가">＋ <span>문제 추가</span></button><button class="quiet" id="fullBtn" title="전체 화면">⛶ <span>전체 화면</span></button><button class="quiet" id="resetBtn" title="점수 초기화">↻ <span>초기화</span></button></div>
+  </header>
+  <main>
+    <div class="eyebrow">READ · MOVE · PLAY</div>
+    <h1 class="headline">Read it.<br><em>Do it.</em> Pass it.</h1>
+    <p class="intro">영어 제시어를 읽고 행동해요. <b>맞으면 PASS, 틀리면 꽝!</b> PASS 후 그림으로 동작을 확인할 수 있어요.</p>
+
+    <section class="setup" aria-label="게임 설정">
+      <div class="panel">
+        <div class="panel-title"><h2>CHOOSE YOUR STAGE</h2><span>기본 제시어 + 직접 추가</span></div>
+        <div class="stages" id="stages"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title"><h2>PLAYERS</h2><span id="playerHelp">Stage 4 설정</span></div>
+        <div class="player-options disabled-options" id="playerOptions">
+          <button class="player" data-count="1">1명<span>SOLO</span></button>
+          <button class="player active" data-count="2">2명<span>DUO</span></button>
+          <button class="player" data-count="3">3명<span>TRIO</span></button>
+        </div>
+        <p class="player-note" id="playerNote">Stage 4에서는 참가 인원에 맞는 문장만 출제돼요.</p>
+      </div>
+    </section>
+
+    <section class="panel editor" id="editor" hidden aria-label="단어와 제시어 추가">
+      <div class="panel-title"><h2>단어와 제시어 추가</h2><button class="quiet editor-close" id="closeEditorBtn" type="button">닫기</button></div>
+      <p class="editor-note">기본 제시어는 그대로 유지돼요. 직접 추가한 단어와 문제는 이 브라우저에 저장됩니다. 다른 기기에서는 백업 파일을 불러오세요.</p>
+      <div class="editor-grid">
+        <div class="editor-card"><h3>단어 보관함</h3><p>CVC 또는 CVCe 단어를 저장해 두고 Stage 1 제시어를 만들 때 활용하세요.</p><form id="wordForm"><label>영어 단어<input id="newWord" required pattern="[A-Za-z]+" maxlength="30" placeholder="예: leaf"></label><label>뜻 <small>(선택)</small><input id="newWordMeaning" maxlength="80" placeholder="예: 나뭇잎"></label><button class="add-button" type="submit">단어 추가</button></form><div class="saved-words" id="savedWords"></div><datalist id="wordOptions"></datalist></div>
+        <div class="editor-card"><h3>게임 제시어 추가</h3><p>Stage 1은 두 단어, Stage 2~4는 문장을 입력해요.</p><form id="promptForm"><label>Stage<select id="editStage"><option value="1">Stage 1 · 두 단어</option><option value="2">Stage 2 · 두 동작 이어 하기</option><option value="3">Stage 3 · 1명 또는 2명</option><option value="4">Stage 4 · 1~3명</option></select></label>
+          <div id="pairFields" class="field-stack"><span class="field-title">Stage 1 두 단어 조합</span><div class="word-pair"><input id="pairWordA" list="wordOptions" required pattern="[A-Za-z]+" placeholder="첫 번째 단어"><input id="pairWordB" list="wordOptions" required pattern="[A-Za-z]+" placeholder="두 번째 단어"></div><small>CVC 또는 CVCe 단어를 한 개씩 입력하세요.</small><label>그림 확인용 이모지<input id="pairIcon" maxlength="8" value="🐾" placeholder="예: 🐾"></label><label>그림에 표시할 행동<input id="pairCue" required maxlength="80" placeholder="예: 토끼처럼 깡충 뛰기"></label></div>
+          <div id="sentenceFields" class="field-stack" hidden><label>영어 문장<textarea id="newSentence" maxlength="260" placeholder="추가할 영어 제시어를 입력하세요."></textarea></label><label id="playersField">참가 인원<select id="entryPlayers"><option value="1">1명</option><option value="2" selected>2명</option><option value="3">3명</option></select></label><div class="word-pair"><label>그림 이모지 <small>(선택)</small><input id="sentenceIcon" maxlength="8" placeholder="예: 👏"></label><label>그림 설명 <small>(선택)</small><input id="sentenceCue" maxlength="80" placeholder="동사 그림을 자동으로 찾지 못할 때"></label></div><small>Stage 2는 then으로 두 동작을 이어 주세요. Stage 3은 6단어 이상, Stage 4는 10단어 이상으로 입력해요.</small></div>
+          <label>한국어 뜻<input id="newMeaning" required maxlength="260" placeholder="진행자가 확인할 뜻"></label><button class="add-button" type="submit">게임에 추가</button></form></div>
+      </div>
+      <div class="editor-bottom"><div><h3>직접 추가한 항목</h3><div id="customList" class="custom-list"></div></div><div class="backup-actions"><button class="quiet" id="exportCustomBtn" type="button">추가 항목 백업</button><label class="quiet import-label" for="importCustomFile">백업 불러오기</label><input id="importCustomFile" type="file" accept="application/json,.json" hidden></div></div>
+    </section>
+
+    <section class="game" id="game">
+      <div class="game-head"><div class="badge"><i class="dot"></i><span id="stageLabel">STAGE 1 · PHONICS</span></div><div class="round" id="roundLabel">READY TO PLAY</div></div>
+      <div class="command-wrap"><div><div class="ready" id="commandText">단어를 띄우고 게임을 시작해 보세요</div><div class="hint" id="commandHint">영어 단어를 읽고 동작하기</div></div></div>
+      <div class="controls" id="controls"><button class="btn start" id="startBtn">게임 시작 <span aria-hidden="true">→</span></button><button class="btn judge pass" id="passBtn">✓ PASS</button><button class="btn judge fail" id="failBtn">✕ 꽝!</button><button class="btn next" id="nextBtn">다음 제시어 <span aria-hidden="true">→</span></button></div>
+      <div class="result neutral" id="result" aria-live="polite">진행자가 아이의 행동을 확인하고 판정 버튼을 눌러 주세요.</div>
+      <div class="cue-tools" id="cueTools" hidden>
+        <button class="cue-toggle" id="cueBtn" type="button" aria-expanded="false" aria-controls="cueGuide">🖼 정답 동작 그림 보기</button>
+        <div class="cue-guide" id="cueGuide" hidden aria-live="polite"></div>
+      </div>
+      <div class="stats"><div class="stat"><span>통과한 제시어</span><strong id="countStat">0 / 40</strong></div><div class="stat passStat"><span>이번 판 PASS</span><strong id="passStat">0</strong></div><div class="stat failStat"><span>꽝</span><strong id="failStat">0</strong></div></div>
+      <div class="progress"><i id="progressBar"></i></div>
+      <div class="footnote"><span>PASS한 제시어는 이 기기에 저장되어 다시 출제되지 않아요. 꽝 제시어는 남은 제시어를 한 바퀴 돌고 다시 나올 수 있어요.</span><span><span class="key">Space</span> 시작 / 다음 · <span class="key">1</span> PASS · <span class="key">2</span> 꽝</span></div>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status"></div>
+  <script>
+    const DATA = 
+{
+  "1": [
+    "Hug rat",
+    "Cute rat",
+    "Rat run",
+    "Hug ram",
+    "Ram run",
+    "Cute hen",
+    "Hen hop",
+    "Hug bug",
+    "Cute bug",
+    "Bug hop",
+    "Mice run",
+    "Mice hide",
+    "Hug mice",
+    "Mole hop",
+    "Huge mole",
+    "Mole hole",
+    "Hop mule",
+    "Cute mule",
+    "Mule run",
+    "Ride mule",
+    "Rake pine",
+    "Pine cone",
+    "Rose vine",
+    "Wet vine",
+    "Cut vine",
+    "Face sun",
+    "Hot sun",
+    "Rub bone",
+    "Hide bone",
+    "Hop hole",
+    "Huge hole",
+    "Wide gate",
+    "Face gate",
+    "Use net",
+    "Wet net",
+    "Use hose",
+    "Use rope",
+    "Ride bike",
+    "Bike ride",
+    "Bike race"
+  ],
+  "2": [
+    "Touch your nose, then clap.",
+    "Clap your hands, then jump.",
+    "Raise your arms, then turn around.",
+    "Stamp your feet, then sit down.",
+    "Turn around slowly, then wave.",
+    "Jump up high, then sit down.",
+    "Sit on grass, then stand up.",
+    "Stand up straight, then wave.",
+    "Touch your toes, then stand up.",
+    "Wave both hands, then smile.",
+    "Pat your head, then clap.",
+    "Tap your knees, then jump.",
+    "Point up high, then turn around.",
+    "Point at trees, then wave.",
+    "Walk around a tree, then stop.",
+    "March slowly, then clap.",
+    "Bend your knees, then stand up.",
+    "Stretch your arms, then turn around.",
+    "Shake your shoulders, then clap.",
+    "Wiggle your fingers, then wave.",
+    "Close your eyes, then open them.",
+    "Open your hands, then clap.",
+    "Touch both ears, then smile.",
+    "Touch one shoulder, then turn around.",
+    "Reach up high, then stretch.",
+    "Look behind you, then turn around.",
+    "Look left, then look right.",
+    "Look right, then look left.",
+    "Hop high, then sit down.",
+    "Stand on tiptoes, then wave.",
+    "Take one step, then clap.",
+    "Take two steps, then turn around.",
+    "Clap three times, then smile.",
+    "Jump three times, then stop.",
+    "Face your partner, then wave.",
+    "Smile really big, then bow.",
+    "Make a circle, then sit down.",
+    "Make one heart, then wave.",
+    "Show your thumbs, then turn around.",
+    "Bow to everyone, then wave."
+  ],
+  "3": [
+    {
+      "p": 1,
+      "t": "You jump by the big oak tree, then wave.",
+      "legacy": [
+        "Reach high, then crouch",
+        "You hop, then crouch.",
+        "You hop beside the oak tree, then crouch."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You walk on the path, then stop.",
+      "legacy": [
+        "Skip sideways, then freeze",
+        "You skip, then freeze.",
+        "You skip along the path, then freeze."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You point at a red leaf, then smile.",
+      "legacy": [
+        "Point backward, then bow",
+        "You point, then bow.",
+        "You point toward a red leaf, then bow."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You turn by a gray rock, then clap.",
+      "legacy": [
+        "Walk backward, then spin",
+        "You shuffle, then spin.",
+        "You shuffle around a stone, then spin."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You clap under the tall tree, then sit.",
+      "legacy": [
+        "Tap both knees, clap",
+        "You clap, then pivot.",
+        "You clap beneath the tall tree, then pivot."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You walk around the big tree, then stop.",
+      "legacy": [
+        "Circle one tree, freeze",
+        "You circle, then pause.",
+        "You circle the old oak, then pause."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You stand by a gray rock, then bend.",
+      "legacy": [
+        "Balance, then touch grass",
+        "You balance, then kneel.",
+        "You balance beside a gray stone, then kneel."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You look behind you, then duck down.",
+      "legacy": [
+        "Touch grass, then balance",
+        "You glance, then duck.",
+        "You glance behind you, then duck low."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You touch the green grass, then wave.",
+      "legacy": [
+        "Look behind, then kneel",
+        "You stoop, then wave.",
+        "You stoop beside the grass, then wave."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You stretch up to the sky, then turn.",
+      "legacy": [
+        "Crouch down, then wave",
+        "You stretch, then twist.",
+        "You stretch toward the bright sky, then twist."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You spin by the path, then sit down.",
+      "legacy": [
+        "Stretch arms, then twist",
+        "You twirl, then salute.",
+        "You twirl near the winding path, then salute."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You tap both knees, then jump twice.",
+      "legacy": [
+        "Raise both arms, freeze",
+        "You tap, then stomp.",
+        "You tap both knees, then stomp twice."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You run on the green grass, then stop.",
+      "legacy": [
+        "Turn twice, then bow",
+        "You jog, then halt.",
+        "You jog across the green grass, then halt."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You walk around a tree, then turn.",
+      "legacy": [
+        "Touch one leaf, spin",
+        "You trot, then sway.",
+        "You trot around a tree, then sway gently."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You reach for a low branch, then bend.",
+      "legacy": [
+        "Find rocks, then point",
+        "You reach, then dip.",
+        "You reach toward a branch, then dip low."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You bend by a leaf, then stand up.",
+      "legacy": [
+        "Run around, then stop",
+        "You bend, then spring.",
+        "You bend beside a leaf, then spring up."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You crawl on the grass, then stand up.",
+      "legacy": [
+        "Walk slowly, clap twice",
+        "You crawl, then stand.",
+        "You crawl across the grass, then stand tall."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You skip on the path, then smile.",
+      "legacy": [
+        "Hop once, then balance",
+        "You prance, then pose.",
+        "You prance along the path, then pose proudly."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You run by the big oak, then stop.",
+      "legacy": [
+        "Bend low, then reach",
+        "You dash, then skid.",
+        "You dash beside the oak, then skid safely."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You jump by a gray rock, then wave.",
+      "legacy": [
+        "Point left, then spin",
+        "You pirouette, then bow.",
+        "You pirouette near a stone, then bow low."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One jumps by the tree while Player Two waves.",
+      "legacy": [
+        "Point right, then crouch",
+        "You leap, then land.",
+        "Player One circles the oak while Player Two balances nearby."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One points at a leaf while Player Two sits.",
+      "legacy": [
+        "Step backward, then bow",
+        "You sidestep, then lunge.",
+        "Player One points toward a leaf while Player Two kneels."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One walks on the path while Player Two stops.",
+      "legacy": [
+        "Step forward, then freeze",
+        "You squat, then rise.",
+        "Player One skips along the path while Player Two freezes."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One claps by the tree while Player Two smiles.",
+      "legacy": [
+        "Walk sideways, then freeze",
+        "You nod, then wink.",
+        "Player One claps beneath the tree while Player Two bows."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One steps by a rock while Player Two turns.",
+      "legacy": [
+        "March slowly, tap knees",
+        "You march, then turn.",
+        "Player One steps around a stone while Player Two twirls."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One stretches to the sky while Player Two bends.",
+      "legacy": [
+        "Stomp twice, then balance",
+        "You step, then salute.",
+        "Player One stretches toward the sky while Player Two crouches."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One waves by the grass while Player Two sits.",
+      "legacy": [
+        "Clap softly, then freeze",
+        "You duck, then kneel.",
+        "Player One waves beside the grass while Player Two salutes."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One runs on the path while Player Two claps.",
+      "legacy": [
+        "Wave overhead, then turn",
+        "You sway, then dip.",
+        "Player One jogs across the field while Player Two pivots."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One touches a leaf while Player Two stands.",
+      "legacy": [
+        "Find leaves, then crouch",
+        "You pivot, then freeze.",
+        "Player One stoops near a leaf while Player Two stands."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One turns by the tree while Player Two jumps.",
+      "legacy": [
+        "Touch bark, then stretch",
+        "You pose, then lean.",
+        "Player One trots around the oak while Player Two sways."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One reaches for a branch while Player Two ducks.",
+      "legacy": [
+        "Balance, then step backward",
+        "You roll, then balance.",
+        "Player One reaches toward a branch while Player Two ducks."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One skips on the path while Player Two waves.",
+      "legacy": [
+        "Turn halfway, then freeze",
+        "You march, then cheer.",
+        "Player One prances along the path while Player Two pauses."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One taps both knees while Player Two jumps twice.",
+      "legacy": [
+        "Reach down, stand tall",
+        "You fold, then rise.",
+        "Player One taps both knees while Player Two stomps twice."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One bends by a rock while Player Two runs.",
+      "legacy": [
+        "Look down, then stretch",
+        "You tiptoe, then nod.",
+        "Player One bends beside a stone while Player Two leaps."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One walks by the tree while Player Two smiles.",
+      "legacy": [
+        "Turn left, then reach",
+        "You whirl, then reach.",
+        "Player One shuffles near the tree while Player Two poses."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One crawls on the grass while Player Two waves.",
+      "legacy": [
+        "Turn right, then crouch",
+        "You sprint, then pause.",
+        "Player One crawls across the grass while Player Two waves."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One runs down the path while Player Two stops.",
+      "legacy": [
+        "Take one step, clap",
+        "You spring, then duck.",
+        "Player One dashes down the path while Player Two halts."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One looks at the sky while Player Two spins.",
+      "legacy": [
+        "Tap your shoulders, spin",
+        "You stroll, then stretch.",
+        "Player One nods toward the sky while Player Two spins."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One walks around the oak while Player Two sits.",
+      "legacy": [
+        "Touch left knee, wave",
+        "You sway, then point.",
+        "Player One tiptoes around the oak while Player Two bows."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One stands by the tree while Player Two turns.",
+      "legacy": [
+        "Touch right knee, spin",
+        "You stand, then wave.",
+        "Player One springs beside the grass while Player Two kneels."
+      ]
+    }
+  ],
+  "4": [
+    {
+      "p": 1,
+      "t": "You walk around the tree, touch a leaf, turn twice, and wave to the group.",
+      "legacy": [
+        "Walk around the tree, reach for the sky, then crouch and freeze.",
+        "You circle the tree, tiptoe toward a leaf, stretch skyward, then kneel."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You jump beside a gray stone, clap three times, look at the sky, and sit on grass.",
+      "legacy": [
+        "Find a fallen leaf, point to a stone, then balance on one foot.",
+        "You balance beside a stone, wave overhead, pivot twice, then rise."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You run to a tree, stop by the path, wave both hands, and smile.",
+      "legacy": [
+        "Take three slow steps backward, circle the tree, clap twice, and bow.",
+        "You weave between trees, duck beneath a branch, clap twice, then freeze."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You stretch both arms, bend down, pick up a leaf, and put it down.",
+      "legacy": [
+        "Walk to the tree, look up, touch your toes, then stretch both arms.",
+        "You trace a spiral in the air, squat low, spring upright, then bow."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You walk across the grass, turn left, touch your knees, and stand tall.",
+      "legacy": [
+        "Balance on one foot, wave overhead, turn slowly, then kneel beside a leaf.",
+        "You pace backward beside the path, shuffle forward, spin halfway, then salute.",
+        "You pace backward beside the path, shuffle forward, spin halfway, then wave."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You point at a leaf, walk around a stone, clap twice, and look up.",
+      "legacy": [
+        "Circle a stone twice, step over a branch, crouch low, and stand tall.",
+        "You stroll along the path, tap your shoulders, twirl once, then pause."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You sit by the tree, tap both knees, stand up, and wave at a friend.",
+      "legacy": [
+        "Point to a leaf, touch your nose, spin halfway, then freeze completely.",
+        "You stoop, scoop up a fallen leaf, scatter it, then rise."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You jump over a line, walk back, turn around, and sit on the grass.",
+      "legacy": [
+        "Walk sideways five steps, tap both knees, turn left, and wave to the group.",
+        "You pick up a fallen leaf, carry it to a stone, place it down, then retreat."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You dance beside the tree, clap your hands, shake your arms, and smile.",
+      "legacy": [
+        "Stretch toward the sky, bend down, pick up a fallen leaf, then set it beside a stone.",
+        "You loop around a stone, hop over a twig, pause, then tiptoe away."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You kick the ball lightly, run along the path, stop beside a tree, and wave.",
+      "legacy": [
+        "Jog slowly around the tree, stop behind it, reach down, and touch the grass.",
+        "You mimic a bird, flap both arms, glide in place, then land.",
+        "You kick the ball lightly, run two steps, stop by the path, and wave."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You hold a leaf, look at the sky, turn to the tree, and sit down.",
+      "legacy": [
+        "Take two steps forward, hop once, trace a circle in the air, then bow.",
+        "You gaze skyward, reach toward a tree, turn in a circle, then kneel."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You walk to the stone, stretch both arms, bend your knees, and stand again.",
+      "legacy": [
+        "Touch the grass with one hand, stand tall, point left, then turn toward the path.",
+        "You zigzag along the path, skip twice, crouch low, then straighten."
+      ]
+    },
+    {
+      "p": 1,
+      "t": "You hop beside a tree, wave to a friend, touch the grass, and stand still.",
+      "legacy": [
+        "Walk in a zigzag, clap three times, crouch beside a tree, and stay still.",
+        "You balance a leaf on your palm, walk slowly, bow, then shake it off."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One walks to the tree while Player Two walks to the stone; both wave and smile.",
+      "legacy": [
+        "Player One circles the tree while Player Two balances, then both clap twice and freeze.",
+        "Player One circles the tree while Player Two balances; together, they clap twice, then bow."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One jumps twice as Player Two claps three times; they trade places and sit on grass.",
+      "legacy": [
+        "Player One points to a leaf; Player Two walks around it, then both bow and turn left.",
+        "Player One points toward a leaf as Player Two tiptoes around it; they switch places and wave."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One holds a leaf while Player Two points at a tree; they turn around and wave.",
+      "legacy": [
+        "Stand back to back, turn outward, swap places carefully, and point toward the sky.",
+        "Player One crouches beside a stone while Player Two stretches upward; they trade places, then freeze."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One runs to a stone while Player Two walks beside the path; both stop and clap.",
+      "legacy": [
+        "Player One steps sideways three times; Player Two mirrors each step, then both crouch and wave.",
+        "Both players walk heel-to-toe along the path, pause by a tree, spin outward, and salute.",
+        "Both players walk heel-to-toe along the path, pause by a tree, spin outward, and wave."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One taps both knees as Player Two stretches both arms; they switch places and sit down.",
+      "legacy": [
+        "Both players find separate fallen leaves, place them on the ground, circle them, and step back.",
+        "Player One sweeps fallen leaves into a pile while Player Two hops around it; both crouch and cheer."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One points to the sky while Player Two looks at the grass; both turn and wave.",
+      "legacy": [
+        "Player One reaches high while Player Two crouches; switch roles, then both freeze.",
+        "Player One lifts a fallen twig while Player Two traces a circle; they set it down, then pivot."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One bends down beside a tree as Player Two stands tall; they change places and clap.",
+      "legacy": [
+        "Face each other, tap your own knees, turn in opposite directions, and meet at the tree.",
+        "Player One steps sideways while Player Two mirrors; they swap places, then bow."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Both players walk around one tree, touch the grass, turn twice, and sit by a stone.",
+      "legacy": [
+        "Player Two points behind the tree; Player One walks around it, then both wave and bow.",
+        "Both players approach the tree, circle in opposite directions, meet on the path, then salute.",
+        "Both players approach the tree, circle in opposite directions, meet on the path, then wave."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One holds the ball while Player Two jumps in place; then they swap places and wave.",
+      "legacy": [
+        "Take turns hopping on one foot, switch to the other, clap together, then sit on grass.",
+        "Player One collects three leaves while Player Two points north; they exchange leaves, then scatter them."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One dances on the grass while Player Two claps along; both turn around and sit down.",
+      "legacy": [
+        "Both players walk three steps forward, pass each other, turn back, and raise one arm.",
+        "Both players lean toward the grass, straighten together, shuffle past each other, and wave."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One walks to a leaf while Player Two walks to a stone; they meet and wave together.",
+      "legacy": [
+        "Player One touches the bark; Player Two touches a stone, then both step back and balance.",
+        "Player One hops twice as Player Two counts; then both switch roles and freeze."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Player One kicks a ball gently while Player Two walks back; both stop and clap twice.",
+      "legacy": [
+        "Make a wide gap, cross toward each other, stop halfway, and point to a fallen leaf.",
+        "Player Two circles the stone while Player One waits; both crouch, then rise."
+      ]
+    },
+    {
+      "p": 2,
+      "t": "Both players stand by a tree, stretch both arms, bend down, and wave to each other.",
+      "legacy": [
+        "Player One crouches by a tree; Player Two circles behind, then both stand and stretch.",
+        "Player One reaches toward a low branch while Player Two walks around a tree; they pause, then bow."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "Player One points at a leaf while Player Two points at the sky; then both sit on grass together.",
+      "legacy": [
+        "All three players clap twice, turn outward, crouch low, then freeze together.",
+        "Player One leads a zigzag walk, Player Two follows, and Player Three spins; everyone freezes."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "Player One walks around a tree, Player Two claps twice, Player Three waves, and all sit on grass.",
+      "legacy": [
+        "Player One circles the tree; Player Two walks backward; Player Three waves, then everyone bows.",
+        "Player One points to a leaf, Player Two balances nearby, Player Three kneels, and all wave."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "Player One holds a leaf, Player Two points to a stone, Player Three looks up, and all turn around.",
+      "legacy": [
+        "Stand in a line, step sideways together, rotate positions, and point toward the path.",
+        "Player One circles a tree, Player Two tiptoes toward a stone, Player Three stretches, and all bow."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "Player One jumps in place, Player Two taps both knees, Player Three waves, and all smile together.",
+      "legacy": [
+        "Player Two touches a fallen leaf while Players One and Three balance, then everyone switches places.",
+        "All three players spread around a tree, switch places clockwise, crouch low, then stand tall."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "Player One walks to the path, Player Two runs to the tree, Player Three waits, and then all clap.",
+      "legacy": [
+        "Player One points left; Player Two crouches; Player Three reaches up, then all turn left.",
+        "Player One hops beside a tree, Player Two pivots, Player Three salutes, and all sit on grass.",
+        "Player One hops beside a tree, Player Two pivots, Player Three waves, and all sit on grass."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "Player One stretches both arms, Player Two bends down, Player Three stands tall, and all change places.",
+      "legacy": [
+        "Spread out around the tree, walk clockwise, stop on cue, and raise both hands.",
+        "Player One carries a leaf, Player Two traces a circle, Player Three claps twice, and they trade roles."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "Player One points to the sky, Player Two points at a leaf, Player Three waves, and all sit on grass.",
+      "legacy": [
+        "Players One and Two take matching steps; Player Three counts aloud; all clap and freeze.",
+        "Player One skips forward, Player Two walks backward, Player Three waves, then all turn outward."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "All three players walk around a tree, stop beside it, clap twice, and wave to one another.",
+      "legacy": [
+        "All three players find a fallen leaf, hold it up, trade places, then point to the tallest tree.",
+        "Player One stoops near the grass, Player Two reaches upward, Player Three sways, and all freeze."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "Player One holds a stone, Player Two holds a leaf, Player Three points at the sky, and all smile.",
+      "legacy": [
+        "Player Three hops twice; Player One turns halfway; Player Two kneels, then everyone stands tall.",
+        "Players One and Two mirror each other as Player Three counts; all bow, then disperse."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "Player One dances, Player Two claps, Player Three turns around, and they sit together on grass.",
+      "legacy": [
+        "Walk toward the center, touch your own shoulders, turn away, and wave to the group.",
+        "Player One makes a wide arc, Player Two weaves behind, Player Three kneels, then all rise."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "Player One kicks a ball, Player Two walks to get it, Player Three waves, and all stop by a tree.",
+      "legacy": [
+        "Player One steps over a branch; Player Two circles it; Player Three jumps beside it, then all bow.",
+        "All three players pick up a fallen leaf, place it beside a stone, circle it, then point skyward."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "Player One looks at a leaf, Player Two looks at a stone, Player Three looks up, and all turn around.",
+      "legacy": [
+        "Make a triangle, swap corners clockwise, crouch together, then point toward the sky.",
+        "Player One taps their knees, Player Two swings their arms, Player Three pivots twice, and all salute.",
+        "Player One taps their knees, Player Two swings their arms, Player Three pivots twice, and all wave."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "Player One walks beside the path, Player Two walks on grass, Player Three walks to a tree, then all wave.",
+      "legacy": [
+        "Player Two walks to a stone, Player Three points to a leaf, Player One stretches; then rotate.",
+        "Player One catches a falling leaf, Player Two ducks, Player Three steps back, then all smile."
+      ]
+    },
+    {
+      "p": 3,
+      "t": "All three players stretch their arms, bend their knees, stand up straight, and clap together outside.",
+      "legacy": [
+        "All three players take two quiet steps, turn in different directions, kneel, and wave overhead.",
+        "Player One walks to the center, Player Two turns outward, Player Three kneels, then all regroup."
+      ]
+    }
+  ]
+};
+    const BASE_WORDS=["rat", "pan", "ram", "jam", "wed", "net", "vet", "wet", "beg", "hen", "pen", "wig", "bin", "fin", "hot", "hop", "mop", "top", "hug", "bug", "hut", "cut", "nut", "rug", "mug", "run", "sun", "rub", "bake", "cane", "cake", "rake", "face", "race", "name", "gate", "lace", "game", "same", "late", "pine", "nine", "bike", "hike", "fine", "vine", "like", "wide", "ride", "dive", "mice", "rice", "hide", "dice", "hope", "bone", "rope", "cone", "hose", "pose", "nose", "rose", "cute", "mule", "use", "huge", "cube", "mole", "pole", "vote", "hole", "home"];
+    const info={1:{name:'EASY START',sub:'CVC / CVCe · 2 words · 동물·자연·동작'},2:{name:'BEGINNER',sub:'2 linked actions · easy words · then'},3:{name:'ACTION PAIR',sub:'6+ words · 1–2 players · 2 actions'},4:{name:'ACTION SENTENCE',sub:'10+ words · 3–4 actions'}};
+    const PASS_KEY='action-pass-passed-v1';
+    const CUSTOM_KEY='action-pass-game-custom-v1';
+    let customData={words:[],entries:[]};try{const parsed=JSON.parse(localStorage.getItem(CUSTOM_KEY)||'{}');customData={words:Array.isArray(parsed.words)?parsed.words:[],entries:Array.isArray(parsed.entries)?parsed.entries:[]}}catch{customData={words:[],entries:[]}}
+    function saveCustomData(){try{localStorage.setItem(CUSTOM_KEY,JSON.stringify(customData));return true}catch{toast('브라우저 저장이 안 돼요. 백업을 내려받아 주세요.');return false}}
+    function customEntryFor(text,stageNum=stage){return customData.entries.find(x=>+x.stage===+stageNum&&x.t===text)}
+    function allEntriesFor(stageNum){const additions=customData.entries.filter(x=>+x.stage===+stageNum).map(x=>stageNum>=3?{p:+x.p,t:x.t,customId:x.id,cueIcon:x.cueIcon,cueLabel:x.cueLabel}:{t:x.t,customId:x.id,cueIcon:x.cueIcon,cueLabel:x.cueLabel});return [...DATA[stageNum],...additions]}
+    function stageTotal(stageNum){return stageNum>=3?allEntriesFor(stageNum).length:allEntriesFor(stageNum).length}
+    function makeId(){return globalThis.crypto&&crypto.randomUUID?crypto.randomUUID():`${Date.now()}-${Math.random().toString(36).slice(2)}`}
+    function titleFirst(word){const x=word.trim().toLowerCase();return x.charAt(0).toUpperCase()+x.slice(1)}
+    let passedByStage={};try{passedByStage=JSON.parse(localStorage.getItem(PASS_KEY)||'{}')}catch{passedByStage={}}
+    let stage=1,playerCount=2,deck=[],seen=0,passes=0,fails=0,state='ready',toastTimer,currentPrompt='';
+    const $=s=>document.querySelector(s), stagesEl=$('#stages');
+    const NOUN_CUES={cat:['🐈','고양이 흉내'],dog:['🐕','강아지 흉내'],pig:['🐖','돼지 흉내'],hen:['🐔','닭 흉내'],fox:['🦊','여우 흉내'],bat:['🦇','박쥐 흉내'],bug:['🐛','벌레 흉내'],cub:['🐻','아기 곰 흉내'],rat:['🐀','쥐 흉내'],pup:['🐶','강아지 흉내'],hat:['🎩','모자 쓰기'],cup:['🥤','컵으로 마시기'],box:['📦','상자 들기'],bag:['🎒','가방 메기'],net:['🥅','그물로 잡기'],fan:['🪭','부채질하기'],kite:['🪁','연 날리기'],bike:['🚲','자전거 타기'],rope:['🪢','줄넘기하기'],bone:['🦴','뼈다귀 흉내']};
+    const STAGE1_CUES={"cute rat":["🐀","귀여운 쥐 흉내"],"rat run":["🐀🏃","쥐처럼 달리기"],"ram run":["🐏🏃","숫양처럼 달리기"],"cute hen":["🐔","귀여운 암탉 흉내"],"hen hop":["🐔⬆️","암탉처럼 깡충 뛰기"],"cute bug":["🐛","귀여운 벌레 흉내"],"bug hop":["🐛⬆️","벌레처럼 깡충 뛰기"],"mice run":["🐁🏃","생쥐처럼 달리기"],"mice hide":["🐁🙈","생쥐처럼 숨기"],"huge mole":["🦫","아주 큰 두더지 흉내"],"mole hole":["🦫🕳️","두더지 굴 흉내"],"cute mule":["🐴","귀여운 노새 흉내"],"mule run":["🐴🏃","노새처럼 달리기"],"ride mule":["🐴","노새 타는 흉내"],"pine cone":["🌲🌰","솔방울 표현하기"],"rose vine":["🌹🌿","장미 덩굴 표현하기"],"wet vine":["🌿💧","젖은 덩굴 흉내"],"cut vine":["🌿✂️","덩굴 자르는 흉내"],"hot sun":["☀️","뜨거운 해 흉내"],"hide bone":["🦴🙈","뼈다귀 숨기기 흉내"],"huge hole":["🕳️","아주 큰 구멍 표현하기"],"wide gate":["🚪","넓은 문 표현하기"],"wet net":["🥅💧","젖은 그물 흉내"],"ride bike":["🚲","자전거 타는 흉내"],"bike ride":["🚲","자전거 타기 흉내"],"bike race":["🚴🏁","자전거 경주 흉내"],"hug ram":["🐏🤗","숫양을 안는 흉내"],"hug mice":["🐁🤗","생쥐들을 안는 흉내"],"mole hop":["🐾⬆️","두더지처럼 깡충 뛰기"],"hop mule":["🐴⬆️","노새처럼 깡충 뛰기"],"rake pine":["🌲🧹","소나무 주변을 긁어모으는 흉내"],"face sun":["👀☀️","해 쪽을 바라보는 흉내"],"rub bone":["🦴🫳","뼈다귀를 문지르는 흉내"],"hop hole":["🕳️⬆️","구멍을 뛰어넘는 흉내"],"face gate":["🚪👀","문 쪽을 바라보는 흉내"],"use net":["🥅🕸️","그물을 쓰는 흉내"],"use hose":["🪴💦","호스로 물을 뿌리는 흉내"],"use rope":["🪢✊","줄을 잡아당기는 흉내"],"hug rat":["🐀🤗","쥐를 안는 흉내"],"hug bug":["🐛🤗","벌레를 안는 흉내"]};
+    const CUE_RULES=[
+      {re:/\bturn(?:s|ed|ing)? in a circle\b/gi,icon:'🌀',label:'한 바퀴 돌기'},
+      {re:/\btrace(?:s|d|ing)? (?:a )?circle\b/gi,icon:'⭕',label:'원을 그리기'},
+      {re:/\bexchange(?:s|d|ing)?\b/gi,icon:'🔁',label:'서로 바꾸기'},
+      {re:/\bmeet(?:s|ing)?|met\b/gi,icon:'🤝',label:'서로 만나기'},
+      {re:/\btouch your nose\b/gi,icon:'👆👃',label:'코 만지기'},
+      {re:/\btouch your toes\b/gi,icon:'🙇🦶',label:'발가락 만지기'},
+      {re:/\btouch both ears\b/gi,icon:'🫳👂',label:'양쪽 귀 만지기'},
+      {re:/\btouch one shoulder\b/gi,icon:'🫳',label:'어깨 만지기'},
+      {re:/\blook left now\b/gi,icon:'👀⬅️',label:'왼쪽 보기'},
+      {re:/\blook right now\b/gi,icon:'👀➡️',label:'오른쪽 보기'},
+      {re:/\blook behind you\b/gi,icon:'👀↩️',label:'뒤돌아보기'},
+      {re:/\bpoint up high\b/gi,icon:'☝️⬆️',label:'위쪽 가리키기'},
+      {re:/\bpoint at trees\b/gi,icon:'🌳☝️',label:'나무 가리키기'},
+      {re:/\bpoint(?:s|ed|ing)? (?:toward|at) a? ?leaf\b/gi,icon:'🍂☝️',label:'잎 가리키기'},
+      {re:/\bpoint(?:s|ed|ing)? north\b/gi,icon:'🧭☝️',label:'북쪽 가리키기'},
+      {re:/\bshow(?:s|ed|ing)? your thumbs\b/gi,icon:'👍',label:'엄지 보여 주기'},
+      {re:/\bzip(?:s|ped|ping)?\b/gi,icon:'🤐',label:'지퍼 올리기 흉내'},
+      {re:/\bwag(?:s|ged|ging)?\b/gi,icon:'🐕',label:'꼬리 흔들기 흉내'},
+      {re:/\bnap(?:s|ped|ping)?\b/gi,icon:'😴',label:'잠자는 흉내'},
+      {re:/\bdip(?:s|ped|ping)?\b/gi,icon:'🧎',label:'몸 낮추기'},
+      {re:/\bpop(?:s|ped|ping)?\b/gi,icon:'💥',label:'팡 하고 튀기'},
+      {re:/\btip(?:s|ped|ping)?\b/gi,icon:'↘️',label:'몸 기울이기'},
+      {re:/\bcut(?:s|ting)?\b/gi,icon:'✂️',label:'자르는 흉내'},
+      {re:/\bmix(?:es|ed|ing)?\b/gi,icon:'🥣',label:'섞기'},
+      {re:/\bhum(?:s|med|ming)?\b/gi,icon:'🎵',label:'콧노래 부르기'},
+      {re:/\bmake(?:s|made|making) a wide arc\b/gi,icon:'🌈',label:'큰 호 그리기'},
+      {re:/\b(?:stand on tiptoes)\b/gi,icon:'🩰',label:'까치발로 서기'},
+      {re:/\b(?:take (?:one|two) steps?)\b/gi,icon:'🚶',label:'한두 걸음 걷기'},
+      {re:/\b(?:make a circle|trace (?:a )?circle)\b/gi,icon:'⭕',label:'원을 그리기'},
+      {re:/\b(?:make (?:one )?heart)\b/gi,icon:'🫶',label:'하트 만들기'},
+      {re:/\b(?:trace (?:a )?spiral)\b/gi,icon:'🌀',label:'나선 그리기'},
+      {re:/\b(?:lead(?:s|ing)? a zigzag walk)\b/gi,icon:'🚶↔️',label:'지그재그로 이끌기'},
+      {re:/\b(?:spring(?:s|ing)? upright|spring(?:s|ing)? up)\b/gi,icon:'🧍',label:'일어서기'},
+      {re:/\b(?:pick(?:s|ed|ing)? up|scoop(?:s|ed|ing)?(?: up)?|collect(?:s|ed|ing)?|gather(?:s|ed|ing)?|catch(?:es|ing|t)?|lift(?:s|ed|ing)?)\b/gi,icon:'🤲',label:'줍거나 들어 올리기'},
+      {re:/\b(?:place(?:s|d|ing)?(?: it)? (?:down|beside|by|near)|set(?:s|ting)?(?: it)? down|put(?:s|ting)?(?: it)? down)\b/gi,icon:'👇',label:'놓기'},
+      {re:/\b(?:switch(?:es|ed|ing)? places|swap(?:s|ped|ping)? places|trade(?:s|d|ing)? places|change(?:s|d|ing)? places|switch(?:es|ed|ing)? roles|trade(?:s|d|ing)? roles)\b/gi,icon:'🔁',label:'자리나 역할 바꾸기'},
+      {re:/\b(?:walk(?:s|ed|ing)? heel-to-toe)\b/gi,icon:'🚶',label:'발을 맞춰 걷기'},
+      {re:/\b(?:jump(?:s|ed|ing)?|hop(?:s|ped|ping)?|leap(?:s|ed|ing)?|spring(?:s|ing)?)\b/gi,icon:'🦘',label:'점프하기'},
+      {re:/\b(?:kick(?:s|ed|ing)?)\b/gi,icon:'🦵⚽',label:'공 차기'},
+      {re:/\b(?:hold(?:s|ing)?|held)\b/gi,icon:'🤲',label:'잎이나 돌 들기'},
+      {re:/\b(?:dance(?:s|d|ing)?)\b/gi,icon:'💃',label:'춤추기'},
+      {re:/\b(?:meet(?:s|ing)?|met)\b/gi,icon:'🤝',label:'만나기'},
+      {re:/\b(?:run(?:s|ning)?|ran|jog(?:s|ged|ging)?|dash(?:es|ed|ing)?|sprint(?:s|ed|ing)?)\b/gi,icon:'🏃',label:'달리기'},
+      {re:/\b(?:walk(?:s|ed|ing)?|stroll(?:s|ed|ing)?|pace(?:s|d|ing)?|march(?:es|ed|ing)?|step(?:s|ped|ping)?|approach(?:es|ed|ing)?|retreat(?:s|ed|ing)?|disperse(?:s|d|ing)?|regroup(?:s|ed|ing)?|follow(?:s|ed|ing)?|lead(?:s|ing)?|take)\b/gi,icon:'🚶',label:'걷거나 이동하기'},
+      {re:/\b(?:skip(?:s|ped|ping)?|prance(?:s|d|ing)?)\b/gi,icon:'🤸',label:'깡충 뛰기'},
+      {re:/\b(?:tiptoe(?:s|d|ing)?|tiptoes)\b/gi,icon:'🤫',label:'까치발로 걷기'},
+      {re:/\b(?:circle(?:s|d|ing)?|loop(?:s|ed|ing)?|orbit(?:s|ed|ing)?)\b/gi,icon:'🔄',label:'빙 돌아가기'},
+      {re:/\b(?:turn(?:s|ed|ing)?|spin(?:s|s|ning)?|spun|twirl(?:s|ed|ing)?|pivot(?:s|ed|ing)?|rotate(?:s|d|ing)?)\b/gi,icon:'🌀',label:'몸 돌리기'},
+      {re:/\b(?:wave(?:s|d|ing)?)\b/gi,icon:'👋',label:'손 흔들기'},
+      {re:/\b(?:clap(?:s|ped|ping)?)\b/gi,icon:'👏',label:'박수 치기'},
+      {re:/\b(?:balance(?:s|d|ing)?)\b/gi,icon:'🤹',label:'균형 잡기'},
+      {re:/\b(?:bend(?:s|ing)?|bent|stoop(?:s|ed|ing)?|lean(?:s|ed|ing)?)\b/gi,icon:'🙇',label:'몸 구부리기'},
+      {re:/\b(?:stretch(?:es|ed|ing)?|reach(?:es|ed|ing)?|reaches)\b/gi,icon:'🙆',label:'팔 뻗기'},
+      {re:/\b(?:stand(?:s|ing)?|stood|rise(?:s|n|d|ing)?|rose|straighten(?:s|ed|ing)?)\b/gi,icon:'🧍',label:'똑바로 서기'},
+      {re:/\b(?:kneel(?:s|ed|ing)?|knelt|crouch(?:es|ed|ing)?|squat(?:s|ted|ting)?|duck(?:s|ed|ing)?)\b/gi,icon:'🧎',label:'몸 낮추기'},
+      {re:/\b(?:bow(?:s|ed|ing)?)\b/gi,icon:'🙇',label:'허리 숙여 인사하기'},
+      {re:/\b(?:point(?:s|ed|ing)?)\b/gi,icon:'☝️',label:'손가락으로 가리키기'},
+      {re:/\b(?:smile(?:s|d|ing)?|cheer(?:s|ed|ing)?)\b/gi,icon:'😄',label:'웃거나 응원하기'},
+      {re:/\b(?:freeze(?:s|d|ing)?|froze|stop(?:s|ped|ping)?|stopped|pause(?:s|d|ing)?|wait(?:s|ed|ing)?)\b/gi,icon:'✋',label:'멈추기'},
+      {re:/\b(?:touch(?:es|ed|ing)?|tap(?:s|ped|ping)?|pat(?:s|ted|ting)?)\b/gi,icon:'🫳',label:'톡톡 두드리거나 만지기'},
+      {re:/\b(?:look(?:s|ed|ing)?|gaze(?:s|d|ing)?|glance(?:s|d|ing)?|face(?:s|d|ing)?)\b/gi,icon:'👀',label:'바라보기'},
+      {re:/\b(?:crawl(?:s|ed|ing)?)\b/gi,icon:'🐾',label:'기어가기'},
+      {re:/\b(?:sweep(?:s|t|ing)?|scatter(?:s|ed|ing)?)\b/gi,icon:'🍂',label:'쓸거나 흩뿌리기'},
+      {re:/\b(?:trace(?:s|d|ing)?)\b/gi,icon:'✍️',label:'손으로 모양 그리기'},
+      {re:/\b(?:shake(?:s|n|d|ing)?|shook|wiggle(?:s|d|ing)?|sway(?:s|ed|ing)?|swing(?:s|ing)?|swung)\b/gi,icon:'🫨',label:'흔들기'},
+      {re:/\b(?:flap(?:s|ped|ping)?)\b/gi,icon:'🪽',label:'날개 퍼덕이기'},
+      {re:/\b(?:glide(?:s|d|ing)?)\b/gi,icon:'🕊️',label:'미끄러지듯 움직이기'},
+      {re:/\b(?:land(?:s|ed|ing)?)\b/gi,icon:'🛬',label:'내려앉기'},
+      {re:/\b(?:mimic(?:s|ked|king)?)\b/gi,icon:'🐦',label:'흉내 내기'},
+      {re:/\b(?:zigzag(?:s|ged|ging)?|weave(?:s|d|ing)?|wove|woven)\b/gi,icon:'↔️',label:'지그재그로 움직이기'},
+      {re:/\b(?:mirror(?:s|ed|ing)?)\b/gi,icon:'🪞',label:'상대 동작 따라 하기'},
+      {re:/\b(?:count(?:s|ed|ing)?)\b/gi,icon:'🔢',label:'숫자 세기'},
+      {re:/\b(?:open(?:s|ed|ing)?)\b/gi,icon:'👐',label:'손이나 눈 열기'},
+      {re:/\b(?:close(?:s|d|ing)?)\b/gi,icon:'🙈',label:'눈 감기'},
+      {re:/\b(?:raise(?:s|d|ing)?)\b/gi,icon:'🙌',label:'팔 들어 올리기'},
+      {re:/\b(?:stamp(?:s|ed|ing)?|stomp(?:s|ed|ing)?)\b/gi,icon:'🦶',label:'발 구르기'},
+      {re:/\b(?:sit(?:s|ting)?|sat)\b/gi,icon:'🪑',label:'앉기'},
+      {re:/\b(?:dig(?:s|ging)?|dug)\b/gi,icon:'🪏',label:'땅 파기'},
+      {re:/\b(?:nod(?:s|ded|ding)?)\b/gi,icon:'🙂',label:'고개 끄덕이기'},
+      {re:/\b(?:hug(?:s|ged|ging)?)\b/gi,icon:'🫂',label:'안아 주기'},
+      {re:/\b(?:rub(?:s|bed|bing)?)\b/gi,icon:'👐',label:'문지르기'},
+      {re:/\b(?:show(?:s|ed|ing)? your thumbs)\b/gi,icon:'👍',label:'엄지 보여 주기'},
+    ];
+    function actorFor(text,index){if(stage<3)return '';if(/^\s*You\b/i.test(text))return '혼자';const prefix=text.slice(0,index),re=/\b(?:all three players|both players|players one and two|players one and three|players two and three|both|player one|player two|player three|together|everyone|they|all)\b/gi;let last='';for(const m of prefix.matchAll(re))last=m[0].toLowerCase();if(last.includes('one and')||last.includes('both')||last.includes('all')||last==='they'||last==='together'||last==='everyone')return '함께';if(last==='player one')return '1번';if(last==='player two')return '2번';if(last==='player three')return '3번';return playerCount===1?'혼자':''}
+    function visualCuesFor(text){const key=text.toLowerCase().trim(),custom=customEntryFor(text);if(stage===1&&custom?.cueIcon&&custom?.cueLabel)return [{icon:custom.cueIcon,label:custom.cueLabel,actor:''}];if(stage===1&&(STAGE1_CUES[key]||NOUN_CUES[key])){const cue=STAGE1_CUES[key]||NOUN_CUES[key];return [{icon:cue[0],label:cue[1],actor:''}]}const found=[];for(const rule of CUE_RULES){const re=new RegExp(rule.re.source,'gi');for(const m of text.matchAll(re))found.push({start:m.index,end:m.index+m[0].length,icon:rule.icon,label:rule.label,actor:actorFor(text,m.index)})}found.sort((a,b)=>a.start-b.start||(b.end-b.start)-(a.end-a.start));const clean=[];for(const cue of found){if(clean.some(x=>cue.start<x.end&&cue.end>x.start))continue;clean.push(cue)}if(!clean.length&&custom?.cueIcon&&custom?.cueLabel)return [{icon:custom.cueIcon,label:custom.cueLabel,actor:''}];return clean.map(({icon,label,actor})=>({icon,label,actor}))}
+    function renderCueGuide(text){const cues=visualCuesFor(text);if(!cues.length)return '<p class="cue-heading">이 문장의 그림 단서를 찾지 못했어요.</p>';return `<p class="cue-heading">그림으로 보는 동작 <small>왼쪽부터 차례대로</small></p><div class="cue-list">${cues.map((c,i)=>`<div class="cue-card"><span class="cue-number">${String(i+1).padStart(2,'0')}</span>${c.actor?`<span class="cue-actor">${c.actor}</span>`:''}<span class="cue-pic" role="img" aria-label="${c.label}">${c.icon}</span><span class="cue-label">${c.label}</span></div>`).join('')}</div>`}
+    function toggleCueGuide(){const guide=$('#cueGuide'),button=$('#cueBtn');if(guide.hidden){guide.innerHTML=renderCueGuide(currentPrompt);guide.hidden=false;button.setAttribute('aria-expanded','true');button.textContent='그림 닫기'}else{guide.hidden=true;button.setAttribute('aria-expanded','false');button.textContent='🖼 정답 동작 그림 보기'}}
+    function renderStages(){stagesEl.innerHTML=Object.entries(info).map(([n,d])=>`<button class="stage ${+n===stage?'active':''}" data-stage="${n}"><span class="n">STAGE 0${n} · ${stageTotal(+n)}개</span><strong>${d.name}</strong><small>${d.sub}</small><b class="check">✓</b></button>`).join('');stagesEl.querySelectorAll('.stage').forEach(b=>b.onclick=()=>selectStage(+b.dataset.stage));}
+    function selectStage(n){stage=n;if(n===3&&playerCount===3)playerCount=2;renderStages();$('#stageLabel').textContent=`STAGE 0${n} · ${info[n].name}`;updatePlayerControls();resetRound(false);}
+    function shuffle(a){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
+    function poolForStage(){const all=allEntriesFor(stage);return stage>=3?all.filter(x=>x.p===playerCount):all}
+    function promptText(item){return typeof item==='string'?item:item.t}
+    function updatePlayerControls(){const options=$('#playerOptions'),buttons=[...options.querySelectorAll('.player')],three=buttons.find(b=>b.dataset.count==='3');options.classList.toggle('disabled-options',stage<3);three.style.display=stage===3?'none':'';buttons.forEach(b=>b.classList.toggle('active',+b.dataset.count===playerCount));$('#playerHelp').textContent=stage>=3?`Stage ${stage} 설정`:'Stage 3·4에서 선택';$('#playerNote').textContent=stage>=3?`현재 ${playerCount}인용 제시어 ${poolForStage().length}개가 출제돼요.`:'Stage 3·4에서 참가 인원을 선택해요.'}
+    function savedPasses(){const saved=new Set(passedByStage[String(stage)]||[]);if(stage===3||stage===4){for(const item of DATA[stage]){const aliases=Array.isArray(item.legacy)?item.legacy:(item.legacy?[item.legacy]:[]);if(aliases.some(alias=>saved.has(alias)))saved.add(promptText(item));}}return saved}
+    function makeDeck(){const passed=savedPasses();deck=shuffle(poolForStage().filter(x=>!passed.has(promptText(x))));seen=0;}
+    function finishStage(){state='complete';$('#commandText').innerHTML='<div class="command">ALL CLEAR!<i class="cursor"></i></div>';$('#commandHint').textContent='ALL PASSED PROMPTS ARE CLEARED';$('#roundLabel').textContent='STAGE COMPLETE';$('#controls').className='controls complete';$('#result').className='result good';$('#result').textContent='이 단계의 제시어를 모두 PASS했어요. 통과한 제시어는 다시 나오지 않습니다.';updateStats();}
+    function showCommand(){$('#cueGuide').hidden=true;$('#cueBtn').setAttribute('aria-expanded','false');$('#cueBtn').textContent='🖼 정답 동작 그림 보기';$('#cueTools').hidden=true;if(!deck.length||seen>=deck.length)makeDeck();if(!deck.length){finishStage();return}const item=deck[seen];currentPrompt=promptText(item);$('#commandText').innerHTML=`<div class="command">${escapeHtml(currentPrompt)}<i class="cursor"></i></div>`;$('#commandHint').textContent=stage===4?`${playerCount} ${playerCount===1?'PLAYER':'PLAYERS'} · READ & ACT`:stage===3?'READ THE STATEMENT · DO THE ACTION':stage===1?'READ TWO WORDS · DO THE ACTION':'READ THE COMMAND · DO THE ACTION';seen++;state='judge';updateStats();$('#roundLabel').textContent=`ROUND ${String(seen).padStart(2,'0')} / ${deck.length}`;$('#controls').className='controls running';$('#result').className='result neutral';$('#result').textContent='행동을 확인한 뒤 PASS 또는 꽝을 눌러 주세요.';}
+    function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+    function judge(ok){if(state!=='judge')return;state='after';if(ok){passes++;if(!passedByStage[String(stage)])passedByStage[String(stage)]=[];if(!passedByStage[String(stage)].includes(currentPrompt)){passedByStage[String(stage)].push(currentPrompt);try{localStorage.setItem(PASS_KEY,JSON.stringify(passedByStage))}catch{}}$('#cueTools').hidden=false;$('#cueGuide').innerHTML=renderCueGuide(currentPrompt);$('#cueGuide').hidden=false;$('#cueBtn').setAttribute('aria-expanded','true');$('#cueBtn').textContent='그림 닫기';}else{fails++;$('#cueTools').hidden=true}$('#controls').className='controls after';$('#result').className=`result ${ok?'good':'bad'}`;$('#result').textContent=ok?'통과! PASS ✓ · 다시 나오지 않아요':'아쉽다! 꽝 ✕';const flash=document.createElement('div');flash.className='flash'+(ok?'':' wrong');$('#game').appendChild(flash);setTimeout(()=>flash.remove(),600);updateStats();}
+    function updateStats(){const pool=poolForStage(),passed=savedPasses(),total=pool.length,completed=pool.filter(x=>passed.has(promptText(x))).length;$('#countStat').textContent=`${completed} / ${total}`;$('#passStat').textContent=passes;$('#failStat').textContent=fails;$('#progressBar').style.width=`${total?completed/total*100:0}%`;}
+    function resetRound(notify=true){deck=[];seen=0;passes=0;fails=0;state='ready';$('#commandText').innerHTML=`<div class="ready">${stage===1?'두 단어 표현':'문장'}를 띄우고 게임을 시작해 보세요</div>`;$('#commandHint').textContent=stage===1?'두 단어를 읽고 동작하기':stage>=3?'영어 평서문을 읽고 행동하기':'영어 지시문을 읽고 행동하기';$('#roundLabel').textContent='READY TO PLAY';$('#controls').className='controls';$('#result').className='result neutral';$('#result').textContent='진행자가 아이의 행동을 확인하고 판정 버튼을 눌러 주세요.';$('#cueTools').hidden=true;$('#cueGuide').hidden=true;$('#cueBtn').setAttribute('aria-expanded','false');$('#cueBtn').textContent='🖼 정답 동작 그림 보기';updateStats();if(notify)toast('점수 초기화 완료 · PASS 제시어 기록은 유지돼요');}
+    function toast(s){const t=$('#toast');t.textContent=s;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1800)}
+    const editor=$('#editor'),editStage=$('#editStage'),pairFields=$('#pairFields'),sentenceFields=$('#sentenceFields'),editPlayers=$('#entryPlayers');
+    function renderSavedWords(){const root=$('#savedWords'),options=$('#wordOptions');root.replaceChildren();options.replaceChildren();for(const word of BASE_WORDS){const chip=document.createElement('span');chip.className='word-chip base-word';chip.textContent=word;root.append(chip);const option=document.createElement('option');option.value=word;options.append(option)}for(const entry of customData.words){if(BASE_WORDS.some(w=>w.toLowerCase()===entry.word.toLowerCase()))continue;const chip=document.createElement('span');chip.className='word-chip';chip.append(document.createTextNode(entry.word+(entry.meaning?' · '+entry.meaning:'')));const del=document.createElement('button');del.type='button';del.textContent='×';del.setAttribute('aria-label',entry.word+' 삭제');del.onclick=()=>{customData.words=customData.words.filter(x=>x.id!==entry.id);saveCustomData();renderSavedWords()};chip.append(del);root.append(chip);const option=document.createElement('option');option.value=entry.word;options.append(option)}}
+    function renderCustomList(){const root=$('#customList');root.replaceChildren();if(!customData.entries.length){root.innerHTML='<span class="empty-custom">추가한 게임 제시어가 없습니다.</span>';return}for(const entry of customData.entries){const item=document.createElement('div');item.className='custom-item';const text=document.createElement('span');text.textContent=`Stage ${entry.stage} · ${entry.t}`;const del=document.createElement('button');del.type='button';del.textContent='삭제';del.onclick=()=>{if(!confirm('이 제시어를 삭제할까요?'))return;customData.entries=customData.entries.filter(x=>x.id!==entry.id);saveCustomData();renderCustomList();renderStages();if(stage===+entry.stage){resetRound(false);toast('제시어를 삭제했어요. PASS 기록은 유지됩니다.')}};item.append(text,del);root.append(item)}}
+    function updateEditorFields(){const one=editStage.value==='1',multi=+editStage.value>=3;pairFields.hidden=!one;sentenceFields.hidden=one;$('#pairWordA').disabled=!one;$('#pairWordB').disabled=!one;$('#pairWordA').disabled=!one;$('#pairWordB').disabled=!one;$('#pairCue').required=one;$('#newSentence').disabled=one;$('#newSentence').required=!one;$('#entryPlayers').disabled=!multi;$('#playersField').hidden=!multi;const three=editPlayers.querySelector('option[value="3"]');three.hidden=editStage.value==='3';if(editStage.value==='3'&&editPlayers.value==='3')editPlayers.value='2'}
+    editStage.addEventListener('change',updateEditorFields);updateEditorFields();
+    $('#wordForm').addEventListener('submit',e=>{e.preventDefault();const word=$('#newWord').value.trim(),meaning=$('#newWordMeaning').value.trim();if(BASE_WORDS.some(x=>x.toLowerCase()===word.toLowerCase())||customData.words.some(x=>x.word.toLowerCase()===word.toLowerCase())){toast('이미 단어 보관함에 있어요.');return}customData.words.push({id:makeId(),word:word.toLowerCase(),meaning});saveCustomData();renderSavedWords();e.target.reset();toast('단어를 보관함에 추가했어요.')});
+    $('#promptForm').addEventListener('submit',e=>{e.preventDefault();const n=+editStage.value;let t='',cueIcon='',cueLabel='',pCount=+editPlayers.value;if(n===1){const a=$('#pairWordA').value.trim(),b=$('#pairWordB').value.trim();if(!/^[A-Za-z]+$/.test(a)||!/^[A-Za-z]+$/.test(b)){toast('Stage 1에는 영어 단어를 하나씩 입력해 주세요.');return}t=titleFirst(a)+' '+b.toLowerCase();cueIcon=$('#pairIcon').value.trim()||'🐾';cueLabel=$('#pairCue').value.trim();if(!cueLabel){toast('그림에 표시할 동작을 적어 주세요.');return}}else{t=$('#newSentence').value.trim();if(!t){toast('영어 문장을 입력해 주세요.');return}const count=t.split(/\s+/).filter(Boolean).length;if(n===2&&!/\bthen\b/i.test(t)){toast('Stage 2는 두 동작을 then으로 이어 주세요.');return}if(n===3&&count<6){toast('Stage 3 문장은 6단어 이상으로 입력해 주세요.');return}if(n===4&&count<10){toast('Stage 4 문장은 10단어 이상으로 입력해 주세요.');return}cueIcon=$('#sentenceIcon').value.trim();cueLabel=$('#sentenceCue').value.trim()}const meaning=$('#newMeaning').value.trim();if(!meaning){toast('한국어 뜻을 입력해 주세요.');return}const duplicate=allEntriesFor(n).some(x=>promptText(x).toLowerCase()===t.toLowerCase()&&(n<3||x.p===pCount));if(duplicate){toast('이미 같은 제시어가 있어요.');return}customData.entries.push({id:makeId(),stage:n,t,p:n>=3?pCount:undefined,meaning,cueIcon,cueLabel});saveCustomData();renderCustomList();renderStages();e.target.reset();editStage.value=String(n);if(n>=3)editPlayers.value=String(pCount);updateEditorFields();stage=n;if(n>=3)playerCount=pCount;renderStages();$('#stageLabel').textContent=`STAGE 0${n} · ${info[n].name}`;updatePlayerControls();resetRound(false);toast('게임에 새 제시어를 추가했어요.')});
+    $('#manageBtn').onclick=()=>{editor.hidden=!editor.hidden;if(!editor.hidden){editor.scrollIntoView({behavior:'smooth',block:'center'});$('#newWord').focus()}};$('#closeEditorBtn').onclick=()=>editor.hidden=true;
+    $('#exportCustomBtn').onclick=()=>{const blob=new Blob([JSON.stringify({format:'action-pass-game-custom-v1',...customData},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Action-Pass-추가항목-백업.json';a.click();URL.revokeObjectURL(url)};
+    $('#importCustomFile').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const incoming=JSON.parse(await file.text());if(!Array.isArray(incoming.words)||!Array.isArray(incoming.entries))throw new Error('invalid');for(const w of incoming.words){if(w&&typeof w.word==='string'&&!customData.words.some(x=>x.word.toLowerCase()===w.word.toLowerCase()))customData.words.push({id:makeId(),word:w.word,meaning:typeof w.meaning==='string'?w.meaning:''})}for(const x of incoming.entries){const n=+x.stage;if(x&&[1,2,3,4].includes(n)&&typeof x.t==='string'&&typeof x.meaning==='string'&&!allEntriesFor(n).some(y=>promptText(y).toLowerCase()===x.t.toLowerCase()&&(n<3||y.p===+x.p))){customData.entries.push({id:makeId(),stage:n,t:x.t,p:n>=3?+x.p:undefined,meaning:x.meaning,cueIcon:x.cueIcon||'',cueLabel:x.cueLabel||''})}}saveCustomData();renderSavedWords();renderCustomList();renderStages();resetRound(false);toast('백업 항목을 불러왔어요.')}catch{toast('Action Pass 백업 JSON을 확인해 주세요.')}e.target.value=''});
+    renderSavedWords();renderCustomList();
+    $('#startBtn').onclick=()=>{makeDeck();showCommand()};$('#cueBtn').onclick=toggleCueGuide;$('#passBtn').onclick=()=>judge(true);$('#failBtn').onclick=()=>judge(false);$('#nextBtn').onclick=showCommand;$('#resetBtn').onclick=()=>resetRound();
+    $('#playerOptions').querySelectorAll('.player').forEach(b=>b.onclick=()=>{if(stage<3||stage===3&&b.dataset.count==='3')return;playerCount=+b.dataset.count;updatePlayerControls();resetRound(false)});
+    $('#fullBtn').onclick=async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch{toast('이 브라우저에서는 전체 화면을 사용할 수 없어요')}};
+    document.addEventListener('keydown',e=>{if(e.target.tagName==='BUTTON'&&[' ','1','2'].includes(e.key))e.preventDefault();if(e.key===' '){e.preventDefault();if(state==='ready')$('#startBtn').click();else if(state==='after')$('#nextBtn').click()}if(e.key==='1'&&state==='judge')judge(true);if(e.key==='2'&&state==='judge')judge(false)});
+    renderStages();selectStage(1);
+  </script>
+</body>
+</html>
